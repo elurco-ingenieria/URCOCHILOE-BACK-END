@@ -21,10 +21,10 @@ const handleGetOrdersByUserId = async (req, res, next) => {
         const orders = await getOrdersByUserId(id_usuario)
 
         if (!orders) {
-            return res.status(404).json({ error: 'No hay pedidos' })
+            return res.status(404).json({ error: 'No hay reservas' })
         }
 
-        res.status(200).json({ message: `Ordenes de compra del ususario con id ${id_usuario}, total de ordenes: ${orders.length}`, orders })
+        res.status(200).json({ message: `reserva del ususario con id ${id_usuario}, total de reservas: ${orders.length}`, orders })
     } catch (error) {
         next(error)
     }
@@ -35,9 +35,9 @@ const handleGetOrderByOrderId = async (req, res, next) => {
     try {
         const order = await getOrderByOrderId(id_compra)
         if (!order) {
-            return res.status(404).json({ error: 'Pedido no encontrado o no tienes permiso para eliminarlo' });
+            return res.status(404).json({ error: 'Reserva no encontrada o no tienes Reserva para eliminarlo' });
         }
-        res.status(200).json({ message: `Detalle de la orden de compra con id ${id_compra}`, order })
+        res.status(200).json({ message: `Detalle de la reserva de compra con id ${id_compra}`, order })
     } catch (error) {
         next(error)
     }
@@ -63,7 +63,7 @@ const handleCreateOrder = async (req, res) => {
         // Validar que todos los campos requeridos estén presentes
         if (!id_usuario || !nombre_cliente || !email_cliente || !detalle || !total || !direccion) {
             return res.status(400).json({
-                error: 'Faltan campos requeridos para crear el pedido'
+                error: 'Faltan campos requeridos para crear la reserva'
             });
         }
 
@@ -79,14 +79,14 @@ const handleCreateOrder = async (req, res) => {
         });
 
         res.status(201).json({
-            message: 'Pedido creado exitosamente',
+            message: 'Reserva creado exitosamente',
             order: newOrder
         });
 
     } catch (error) {
         console.error('Error en handleCreateOrder:', error);
         res.status(500).json({
-            error: 'Error al crear el pedido'
+            error: 'Error al crear la reserva'
         });
     }
 };
@@ -104,10 +104,10 @@ const handleUpdateOrderStatus = async (req, res, next) => {
         const order = await updateOrderStatus(id_compra, estado)
 
         if (!order) {
-            return res.status(404).json({ error: 'Pedido no encontrado' });
+            return res.status(404).json({ error: 'Reserva no encontrado' });
         }
 
-        res.status(200).json({ message: `Estado de la orden de compra con id ${id_compra} actualizado a ${estado} exitosamente`, order })
+        res.status(200).json({ message: `Estado de la reserva de compra con id ${id_compra} actualizado a ${estado} exitosamente`, order })
     } catch (error) {
         next(error)
     }
@@ -124,7 +124,7 @@ const handleDeleteOrder = async (req, res, next) => {
         /*if (!order) {
             return res.status(404).json({ error: 'Pedido no encontrado o no tienes permiso para eliminarlo' });
         }*/
-        res.status(200).json({ message: 'Orden de compra eliminada exitosamente', order })
+        res.status(200).json({ message: 'reserva eliminada exitosamente', order })
     } catch (error) {
         next(error)
     }

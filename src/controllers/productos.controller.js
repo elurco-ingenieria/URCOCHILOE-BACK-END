@@ -21,7 +21,7 @@ const handleGetAllProducts = async (req, res, next) => {
         res.status(200).json(products)
 
         if (!products) {
-            return res.status(404).json({ error: 'No hay productos' })
+            return res.status(404).json({ error: 'No hay alojamiento ' })
         }
 
     } catch (error) {
@@ -35,7 +35,7 @@ const handleGetProductById = async (req, res, next) => {
         const product = await getProductById(id)
 
         if (!product) {
-            return res.status(404).json({ error: 'Producto no encontrado' });
+            return res.status(404).json({ error: 'alojamiento  no encontrado' });
         }
 
         res.status(200).json(product)
@@ -69,10 +69,10 @@ const handleUpdateProduct = async (req, res, next) => {
         const product = await updateProduct(id, nombre_producto, descripcion, precio, stock)
 
         if (!product) {
-            return res.status(404).json({ error: 'Producto no encontrado' });
+            return res.status(404).json({ error: 'alojamiento  no encontrado' });
         }
 
-        res.status(200).json({ message: 'Producto actualizado correctamente', product })
+        res.status(200).json({ message: 'alojamiento  actualizado correctamente', product })
     } catch (error) {
         next(error)
     }
@@ -84,10 +84,10 @@ const handleDeleteProduct = async (req, res, next) => {
         const product = await deleteProduct(id)
 
         if (!product) {
-            return res.status(404).json({ error: 'Producto no encontrado' });
+            return res.status(404).json({ error: 'alojamiento  no encontrado' });
         }
 
-        res.status(200).json({ message: 'Producto eliminado correctamente' })
+        res.status(200).json({ message: 'alojamiento eliminado correctamente' })
     } catch (error) {
         next(error)
     }
